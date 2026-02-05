@@ -24,7 +24,7 @@
 </table>
 
 <script>
-fetch('https://docs.google.com/spreadsheets/d/e/https://docs.google.com/spreadsheets/d/e/2PACX-1vR1iDR-0NEJGFszPMShd5CSwWMMh4sOz84nV1nhsxzCByXvDYhKyoLTrHWBnXgT5fBBhTHJiynQBlZ7/pub?gid=1063817059&single=true&output=csv/pub?output=csv')
+fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vR1iDR-0NEJGFszPMShd5CSwWMMh4sOz84nV1nhsxzCByXvDYhKyoLTrHWBnXgT5fBBhTHJiynQBlZ7/pub?gid=1063817059&single=true&output=csv')
   .then(response => response.text())
   .then(csv => {
     const rows = csv.split('\n').slice(1);
@@ -42,6 +42,9 @@ fetch('https://docs.google.com/spreadsheets/d/e/https://docs.google.com/spreadsh
       `;
       tbody.appendChild(tr);
     });
+  })
+  .catch(error => {
+    console.error('Error loading CSV:', error);
   });
 </script>
 
