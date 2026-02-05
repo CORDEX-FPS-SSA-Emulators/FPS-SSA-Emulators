@@ -7,46 +7,8 @@
 <body>
 
 <h1>FPS-SSA Emulators</h1>
+
 <p>Simulation status webpage</p>
-
-<h2>FPS-SSA Partners</h2>
-
-<table border="1" cellpadding="6" id="partners-table">
-  <thead>
-    <tr>
-      <th>Partner</th>
-      <th>Institution</th>
-      <th>Country</th>
-      <th>Role</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
-
-<script>
-fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vR1iDR-0NEJGFszPMShd5CSwWMMh4sOz84nV1nhsxzCByXvDYhKyoLTrHWBnXgT5fBBhTHJiynQBlZ7/pub?gid=1063817059&single=true&output=csv')
-  .then(response => response.text())
-  .then(csv => {
-    const rows = csv.split('\n').slice(1);
-    const tbody = document.querySelector('#partners-table tbody');
-
-    rows.forEach(row => {
-      if (!row.trim()) return;
-      const cols = row.split(',');
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${cols[0]}</td>
-        <td>${cols[1]}</td>
-        <td>${cols[2]}</td>
-        <td>${cols[3]}</td>
-      `;
-      tbody.appendChild(tr);
-    });
-  })
-  .catch(error => {
-    console.error('Error loading CSV:', error);
-  });
-</script>
 
 </body>
 </html>
