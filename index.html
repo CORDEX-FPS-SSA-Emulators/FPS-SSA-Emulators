@@ -1,51 +1,142 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>FPS-SSA Emulators</title>
+  <meta charset="UTF-8">
+  <title>FPS-SSA Emulators</title>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      color: #222;
+    }
+
+    header {
+      border-bottom: 1px solid #ddd;
+      padding: 20px 40px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    nav {
+      margin-top: 10px;
+    }
+
+    nav a {
+      margin-right: 20px;
+      text-decoration: none;
+      color: #555;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    nav a.active {
+      color: #000;
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    section {
+      display: none;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background: #f5f5f5;
+    }
+  </style>
 </head>
+
 <body>
 
-<h1>FPS-SSA Emulators</h1>
-<p>Simulation status webpage</p>
+<header>
+  <h1>FPS-SSA Emulators</h1>
 
-<h2>FPS-SSA Partners</h2>
+  <nav>
+    <a onclick="showSection('partners')" class="active">Partners</a>
+    <a onclick="showSection('publications')">Publications</a>
+    <a onclick="showSection('protocols')">Protocols</a>
+  </nav>
+</header>
 
-<table border="1" cellpadding="6" id="partners-table">
-  <thead>
-    <tr>
-      <th>Partner</th>
-      <th>Institution</th>
-      <th>Country</th>
-      <th>Role</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
+<main>
+
+  <!-- PARTNERS -->
+  <section id="partners" class="active">
+    <h2>Partners</h2>
+    <p>FPS-SSA participating institutions and partners.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Partner</th>
+          <th>Institution</th>
+          <th>Country</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody id="partners-table">
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <h2>Publications</h2>
+    <p>Relevant publications related to FPS-SSA.</p>
+
+    <ul>
+      <li>Author et al. (Year) – Title – Journal</li>
+      <li>Author et al. (Year) – Title – Journal</li>
+    </ul>
+  </section>
+
+  <!-- PROTOCOLS -->
+  <section id="protocols">
+    <h2>Protocols</h2>
+    <p>Simulation protocols and documentation.</p>
+
+    <ul>
+      <li><a href="#">FPS-SSA Experiment Protocol</a></li>
+      <li><a href="#">Emulator Evaluation Protocol</a></li>
+    </ul>
+  </section>
+
+</main>
 
 <script>
-fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vR1iDR-0NEJGFszPMShd5CSwWMMh4sOz84nV1nhsxzCByXvDYhKyoLTrHWBnXgT5fBBhTHJiynQBlZ7/pub?gid=1063817059&single=true&output=csv')
-  .then(response => response.text())
-  .then(csv => {
-    const rows = csv.split('\n').slice(1);
-    const tbody = document.querySelector('#partners-table tbody');
+function showSection(id) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
 
-    rows.forEach(row => {
-      if (!row.trim()) return;
-      const cols = row.split(',');
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${cols[0]}</td>
-        <td>${cols[1]}</td>
-        <td>${cols[2]}</td>
-        <td>${cols[3]}</td>
-      `;
-      tbody.appendChild(tr);
-    });
-  })
-  .catch(error => {
-    console.error('Error loading CSV:', error);
-  });
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
 </script>
 
 </body>
